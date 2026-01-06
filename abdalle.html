@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>90 Day To-Do Planner</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+    }
+    .container {
+        width: 400px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    h2 {
+        text-align: center;
+    }
+    select, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    ul {
+        padding: 0;
+        margin-top: 20px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    li {
+        list-style: none;
+        padding: 8px;
+        margin-bottom: 5px;
+        background: #eee;
+        cursor: pointer;
+    }
+    .done {
+        text-decoration: line-through;
+        color: gray;
+        background: #d4ffd4;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>90 Day Goal Planner</h2>
+
+    <select id="goal">
+        <option value="">-- Select Goal --</option>
+        <option value="english">Learn English (3 Months)</option>
+        <option value="gym">Go to Gym (3 Months)</option>
+    </select>
+
+    <button onclick="generatePlan()">Generate 90-Day Plan</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+function generatePlan() {
+    const goal = document.getElementById("goal").value;
+    const taskList = document.getElementById("taskList");
+    taskList.innerHTML = "";
+
+    if (goal === "") {
+        alert("Please select a goal");
+        return;
+    }
+
+    for (let day = 1; day <= 90; day++) {
+        let taskText = "";
+
+        if (goal === "english") {
+            if (day <= 30) {
+                taskText = "Day " + day + ": Learn basic English words";
+            } else if (day <= 60) {
+                taskText = "Day " + day + ": Practice grammar and speaking";
+            } else {
+                taskText = "Day " + day + ": Speak English daily and listen";
+            }
+        }
+
+        if (goal === "gym") {
+            if (day % 7 === 0) {
+                taskText = "Day " + day + ": Rest day";
+            } else if (day <= 30) {
+                taskText = "Day " + day + ": Light full body workout";
+            } else if (day <= 60) {
+                taskText = "Day " + day + ": Strength training";
+            } else {
+                taskText = "Day " + day + ": Advanced workout + cardio";
+            }
+        }
+
+        const li = document.createElement("li");
+        li.textContent = taskText;
+
+        li.onclick = function () {
+            li.classList.toggle("done");
+        };
+
+        taskList.appendChild(li);
+    }
+}
+</script>
+<script src="ab.js"></script>
+</body>
+</html>

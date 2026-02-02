@@ -1,112 +1,81 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>90 Day To-Do Planner</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f4f4f4;
-    }
-    .container {
-        width: 400px;
-        margin: 40px auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-    }
-    h2 {
-        text-align: center;
-    }
-    select, button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-    }
-    ul {
-        padding: 0;
-        margin-top: 20px;
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    li {
-        list-style: none;
-        padding: 8px;
-        margin-bottom: 5px;
-        background: #eee;
-        cursor: pointer;
-    }
-    .done {
-        text-decoration: line-through;
-        color: gray;
-        background: #d4ffd4;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart To-Do List | Professional Planner</title>
+    <link rel="stylesheet" href="koofi.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">SmartPlanner</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#planning">Planning</a></li>
+                <li><a href="#execution">Execution</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="container">
-    <h2>90 Day Goal Planner</h2>
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>SMART TO DO LIST PROJECT</h1>
+            <p>Planning Board + Daily Task Attendance System</p>
+            <a href="#planning" class="cta-btn">Get Started</a>
+        </div>
+    </header>
 
-    <select id="goal">
-        <option value="">-- Select Goal --</option>
-        <option value="english">Learn English (3 Months)</option>
-        <option value="gym">Go to Gym (3 Months)</option>
-    </select>
+    <div class="container">
+        <!-- Project Overview -->
+        <section class="overview-card">
+            <h2>Project Overview</h2>
+            <p>
+                This project is designed to streamline your productivity through a two-step process. 
+                First, use the <strong>Planning Board</strong> to brainstorm and capture ideas with sticky notes. 
+                Then, move to <strong>Task Execution</strong> to track your daily progress with our unique attendance system.
+            </p>
+        </section>
 
-    <button onclick="generatePlan()">Generate 90-Day Plan</button>
+        <!-- PART 1: STICKY NOTES -->
+        <section id="planning" class="section-card">
+            <div class="section-header">
+                <h2>Planning Board (Sticky Notes )</h2>
+                <p>Capture your ideas and plans instantly.</p>
+            </div>
+            <div class="input-box">
+                <input type="text" id="noteText" placeholder="Write your plan or idea...">
+                <button onclick="addNote()">Add Note</button>
+            </div>
+            <div class="notes-area" id="notesArea">
+                <!-- Notes will appear here -->
+            </div>
+        </section>
 
-    <ul id="taskList"></ul>
-</div>
+        <!-- PART 2: TODO LIST -->
+        <section id="execution" class="section-card">
+            <div class="section-header">
+                <h2>Task Execution & Attendance</h2>
+                <p>Track your daily consistency and reach your goals.</p>
+            </div>
+            <div class="input-box dual-input">
+                <input type="text" id="taskName" placeholder="Enter Task Name">
+                <input type="number" id="taskDays" placeholder="Number of Days">
+                <button onclick="createTask()">Create Task Tracker</button>
+            </div>
+            <div id="daysList" class="days-list">
+                <!-- Task tracker will appear here -->
+            </div>
+        </section>
+    </div>
 
-<script>
-function generatePlan() {
-    const goal = document.getElementById("goal").value;
-    const taskList = document.getElementById("taskList");
-    taskList.innerHTML = "";
+    <footer>
+        <p>&copy; 2026 SmartPlanner Project. All rights reserved.</p>
+    </footer>
 
-    if (goal === "") {
-        alert("Please select a goal");
-        return;
-    }
-
-    for (let day = 1; day <= 90; day++) {
-        let taskText = "";
-
-        if (goal === "english") {
-            if (day <= 30) {
-                taskText = "Day " + day + ": Learn basic English words";
-            } else if (day <= 60) {
-                taskText = "Day " + day + ": Practice grammar and speaking";
-            } else {
-                taskText = "Day " + day + ": Speak English daily and listen";
-            }
-        }
-
-        if (goal === "gym") {
-            if (day % 7 === 0) {
-                taskText = "Day " + day + ": Rest day";
-            } else if (day <= 30) {
-                taskText = "Day " + day + ": Light full body workout";
-            } else if (day <= 60) {
-                taskText = "Day " + day + ": Strength training";
-            } else {
-                taskText = "Day " + day + ": Advanced workout + cardio";
-            }
-        }
-
-        const li = document.createElement("li");
-        li.textContent = taskText;
-
-        li.onclick = function () {
-            li.classList.toggle("done");
-        };
-
-        taskList.appendChild(li);
-    }
-}
-</script>
-<script src="ab.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
